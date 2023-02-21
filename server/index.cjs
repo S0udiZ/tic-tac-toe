@@ -31,14 +31,36 @@ const gameServer = new Server({
 // register your room handlers
 gameServer.define('tictactoe', TicTacToe);
 
+function getFileOrDirectory(file, path) {
+	if (fs.existsSync(path + file) && fs.lstatSync(path + file).isDirectory()) {
+		const newPath = path + file + '/';
+		return {
+			name: file,
+			type: 'folder',
+			path: newPath,
+			children: fs.readdirSync(`${path}/${file}`).map((file) => {
+				return getFileOrDirectory(file, newPath);
+			})
+		};
+	} else {
+		return {
+			name: file,
+			type: 'file'
+		};
+	}
+}
+
 app.get('/data', (req, res) => {
 	// send back all the files in base directory
-	res.json(fs.readdirSync('./'));
-});
-
-app.get('/data/:folder', (req, res) => {
-	// send back the folder in requested directory
-	res.json(fs.readdirSync(`./${req.params.folder}`));
+	// const data = fs.readdirSync('./').forEach((file) => {
+	// 	if (file === 'node_modules') return;
+	// 	getFileOrDirectory(file, './');
+	// });
+	const data = fs.readdirSync('./').map((file) => {
+		if (file === 'node_modules') return;
+		return getFileOrDirectory(file, './');
+	});
+	res.json(data);
 });
 
 app.use("/colyseus", monitor());
