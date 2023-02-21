@@ -1,0 +1,42 @@
+{
+	"name": "tic-tac-toe",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "concurrently \"vite dev --host\" \"cd server && nodemon index.cjs\"",
+		"build": "vite build",
+		"preview": "concurrently \"vite preview\" \"cd server && node index.cjs\"",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@skeletonlabs/skeleton": "^0.124.2",
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.5.0",
+		"autoprefixer": "^10.4.13",
+		"eslint": "^8.28.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"svelte": "^3.54.0",
+		"svelte-adapter-github": "^1.0.0-next.0",
+		"svelte-check": "^3.0.1",
+		"svelte-preprocess": "^5.0.1",
+		"tailwindcss": "^3.2.6",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@colyseus/monitor": "^0.14.22",
+		"colyseus": "^0.14.24",
+		"colyseus.js": "^0.14.13",
+		"concurrently": "^7.6.0",
+		"express": "^4.18.2",
+		"nodemon": "^2.0.20"
+	}
+}
