@@ -12,8 +12,12 @@ const { TicTacToe } = require('./rooms/TicTacToeRoom.cjs');
 const port = Number(env.PORT || 2567);
 
 const options = {
-	key: fs.readFileSync('../**/*.key'),
-	cert: fs.readFileSync('../**/*.crt')
+	key: fs.readFileSync(env.KEY),
+	cert: fs.readFileSync(env.CERT),
+	ca: [
+		fs.readFileSync(env.CAROOT),
+		fs.readFileSync(env.CABUNDLE)
+	]
 }
 
 const app = express();
