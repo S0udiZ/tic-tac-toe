@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { writable } from 'svelte/store';
 
-	const client = new Colyseus.Client('ws://localhost:3000');
+	const client = new Colyseus.Client("ws://" + import.meta.env.VITE_serverUrl);
 
 	let name = '';
 	let created = false;
@@ -136,7 +136,7 @@
 	{#if !created}
 		<div class="w-screen h-screen flex justify-center items-center">
 			<div class="flex flex-wrap max-w-lg gap-10">
-				<label class="text-5xl font-bold text-white">
+				<label class="lg:text-5xl text-xl mx-auto font-bold text-white">
                     Name:
                     <input class="text-black" type="text" bind:value={name} />
                 </label>

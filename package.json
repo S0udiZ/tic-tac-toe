@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "concurrently \"vite dev --host\" \"cd server && nodemon index.cjs\"",
 		"build": "vite build",
-		"preview": "concurrently \"vite preview --host\" \"cd server && node index.cjs\"",
+		"preview": "vite preview --host",
+		"server": "node server/index.cjs",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
@@ -36,6 +37,8 @@
 		"colyseus": "^0.14.24",
 		"colyseus.js": "^0.14.13",
 		"concurrently": "^7.6.0",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"nodemon": "^2.0.20"
 	}

@@ -68,7 +68,7 @@
 	let player2: Player;
 
 	async function connect() {
-		const client = new Colyseus.Client('ws://localhost:3000');
+		const client = new Colyseus.Client("ws://" + import.meta.env.VITE_serverUrl);
 		const roomId = $page.url.searchParams.get('room');
 		const name = $page.url.searchParams.get('name');
 		try {
