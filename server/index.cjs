@@ -38,7 +38,7 @@ app.get('/data', (req, res) => {
 
 app.get('/data/:folder', (req, res) => {
 	// send back the folder in requested directory
-	res.json(fs.readdirSync(`./${req.params.file}`));
+	res.json(fs.readdirSync(`./${req.params.folder}`));
 });
 
 app.use("/colyseus", monitor());
