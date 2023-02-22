@@ -3,19 +3,25 @@ require('dotenv').config();
 const { Server } = require('colyseus');
 const { monitor } = require('@colyseus/monitor');
 const { WebSocketTransport } = require('@colyseus/ws-transport');
-const http = require('http');
-// const fs = require('fs');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { TicTacToe } = require('./rooms/TicTacToeRoom.cjs');
 
 const port = Number(env.SERVERPORT || 2567);
 
+const options = {
+	key: fs.readFileSync(path.join(__dirname, 'certs', 'key.pem')),
+	cert: fs.readFileSync(path.join(__dirname, 'certs', 'cert.pem'))
+}
+
 const app = express();
 app.use(express.json(),cors({origin: '*'}));
 const gameServer = new Server({
 	transport: new WebSocketTransport({
-		server: http.createServer(app)
+		server: https.createServer(options, app)
 	})
 });
 
