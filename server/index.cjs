@@ -3,7 +3,7 @@ require('dotenv').config();
 const { Server } = require('colyseus');
 const { monitor } = require('@colyseus/monitor');
 const { WebSocketTransport } = require('@colyseus/ws-transport');
-const http2 = require('http2');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json(),cors({origin: '*'}));
 const gameServer = new Server({
 	transport: new WebSocketTransport({
-		server: http2.createSecureServer(options, app)
+		server: http.createServer(app)
 	})
 });
 
